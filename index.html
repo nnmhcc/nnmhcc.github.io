@@ -109,10 +109,11 @@
     h1 {
       position: relative;
       margin: 0;
-      font-size: clamp(42px, 7vw, 80px);
-      line-height: .98;
-      letter-spacing: -.06em;
-      text-wrap: balance;
+      font-size: clamp(30px, 8.2vw, 78px);
+      line-height: 1.04;
+      letter-spacing: -.055em;
+      white-space: nowrap;
+      text-wrap: normal;
       text-shadow: 0 10px 36px rgba(37, 99, 235, .16);
     }
 
@@ -143,7 +144,7 @@
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 18px;
-      perspective: 1200px;
+      perspective: 1000px;
     }
 
     .card {
@@ -174,15 +175,16 @@
       -webkit-backdrop-filter: blur(26px) saturate(170%);
       transform: rotateX(var(--rx)) rotateY(var(--ry)) translateY(0) translateZ(0);
       transform-style: preserve-3d;
-      transition: transform .36s cubic-bezier(.2,.8,.2,1), border-color .36s ease, box-shadow .36s ease, background .36s ease;
+      transition: transform .26s cubic-bezier(.2,.8,.2,1), border-color .26s ease, box-shadow .26s ease, background .26s ease;
     }
 
     .card.size-large { grid-column: span 6; }
 
     .card.has-image {
       background:
-        linear-gradient(145deg, rgba(255,255,255,.8), rgba(255,255,255,.5)),
+        linear-gradient(145deg, rgba(255,255,255,.34), rgba(239,246,255,.18)),
         var(--card-image) center / cover no-repeat;
+      background-blend-mode: soft-light, normal;
     }
 
     .card::before,
@@ -199,33 +201,44 @@
         linear-gradient(135deg, rgba(255,255,255,.98), transparent 24% 72%, rgba(219,234,254,.62)),
         radial-gradient(circle at 0 0, var(--glow-strong), transparent 34%),
         radial-gradient(circle at 100% 100%, rgba(37, 99, 235, .18), transparent 31%);
-      opacity: .48;
-      mask-image: linear-gradient(#000, transparent 88%);
+      opacity: .34;
+      mask-image: linear-gradient(#000, transparent 90%);
+    }
+
+    .card.has-image::before {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.22), transparent 30% 76%, rgba(219,234,254,.18)),
+        radial-gradient(circle at 0 0, rgba(96,165,250,.18), transparent 28%);
+      opacity: .24;
+    }
+
+    .card.has-image::after {
+      opacity: 0;
     }
 
     .card::after {
       inset: -45%;
       background: conic-gradient(from 180deg, transparent, rgba(255,255,255,.72), rgba(96, 165, 250, .42), rgba(37, 99, 235, .18), transparent 72%);
-      filter: blur(24px);
+      filter: blur(20px);
       opacity: 0;
-      transform: rotate(12deg) scale(.86);
-      transition: opacity .36s ease, transform .36s ease;
+      transform: rotate(10deg) scale(.92);
+      transition: opacity .26s ease, transform .26s ease;
     }
 
     .card:hover,
     .card:focus-visible {
-      border-color: rgba(37, 99, 235, .38);
+      border-color: rgba(37, 99, 235, .30);
       box-shadow:
-        0 28px 74px rgba(37, 99, 235, .20),
-        0 0 38px rgba(96, 165, 250, .30),
+        0 18px 44px rgba(37, 99, 235, .15),
+        0 0 22px rgba(96, 165, 250, .18),
         inset 0 1px 0 rgba(255, 255, 255, .96);
-      transform: rotateX(var(--rx)) rotateY(var(--ry)) translateY(-8px) translateZ(18px);
+      transform: rotateX(var(--rx)) rotateY(var(--ry)) translateY(-3px) translateZ(6px);
     }
 
     .card:hover::after,
     .card:focus-visible::after {
-      opacity: .82;
-      transform: rotate(18deg) scale(1);
+      opacity: .38;
+      transform: rotate(14deg) scale(.96);
     }
 
     .card:focus-visible {
@@ -238,7 +251,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
-      transform: translateZ(24px);
+      transform: translateZ(10px);
     }
 
     .icon {
@@ -282,7 +295,7 @@
       font-size: 22px;
       line-height: 1.25;
       letter-spacing: -.02em;
-      transform: translateZ(32px);
+      transform: translateZ(12px);
       color: rgba(12, 32, 68, .96);
     }
 
@@ -291,7 +304,7 @@
       color: rgba(33, 64, 112, .70);
       line-height: 1.7;
       font-size: 15px;
-      transform: translateZ(26px);
+      transform: translateZ(8px);
     }
 
     .card-bottom {
@@ -299,7 +312,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      transform: translateZ(30px);
+      transform: translateZ(10px);
       color: rgba(33, 64, 112, .72);
       font-size: 14px;
     }
@@ -319,7 +332,7 @@
 
     .card:hover .arrow,
     .card:focus-visible .arrow {
-      transform: translateX(4px);
+      transform: translateX(2px);
       background: rgba(219, 234, 254, .78);
     }
 
@@ -377,7 +390,12 @@
     @media (max-width: 520px) {
       .hero {
         border-radius: 24px;
-        padding: 28px 20px;
+        padding: 28px 18px;
+      }
+
+      h1 {
+        font-size: clamp(28px, 9vw, 36px);
+        letter-spacing: -.06em;
       }
 
       .card {
@@ -410,7 +428,7 @@
 <body>
   <main class="page">
     <section class="hero" aria-labelledby="page-title">
-      <h1 id="page-title"><span class="title-gradient" data-field="hero-title">楠楠漫画</span><br /><span data-field="hero-subtitle">永久页</span></h1>
+      <h1 id="page-title"><span class="title-gradient" data-field="hero-title">楠楠漫画</span><span class="hero-title-gap" aria-hidden="true"> </span><span data-field="hero-subtitle">永久页</span></h1>
       <p class="notice" data-field="notice">正在加载页面配置...</p>
     </section>
 
@@ -664,8 +682,8 @@
           const y = event.clientY - rect.top;
           const px = x / rect.width;
           const py = y / rect.height;
-          const rotateY = (px - .5) * 9;
-          const rotateX = (.5 - py) * 9;
+          const rotateY = (px - .5) * 3;
+          const rotateX = (.5 - py) * 3;
           card.style.setProperty("--rx", `${rotateX.toFixed(2)}deg`);
           card.style.setProperty("--ry", `${rotateY.toFixed(2)}deg`);
           card.style.setProperty("--mx", `${(px * 100).toFixed(1)}%`);
